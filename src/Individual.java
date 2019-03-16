@@ -8,20 +8,32 @@ public class Individual {
     List<Integer> coefficients;
     int degree;
 
-    Individual(int degree){
+    Individual(int degree) {
         takenNotTaken = new ArrayList<>();
         coefficients = new ArrayList<>();
         this.degree = degree;
     }
 
-   void initialise(){
-       Random random = new Random();
+    public List<Integer> getTakenNotTaken() {
+        return takenNotTaken;
+    }
 
-       for (int i = 0; i < (degree+1) ; i++) {
-           takenNotTaken.add(random.nextInt(2));
-           coefficients.add(random.nextInt());
-       }
-   }
+    public List<Integer> getCoefficients() {
+        return coefficients;
+    }
+
+    public int getDegree() {
+        return degree;
+    }
+
+    void initialise() {
+        Random random = new Random();
+
+        for (int i = 0; i < (degree + 1); i++) {
+            takenNotTaken.add(random.nextInt(2));
+            coefficients.add(random.nextInt());
+        }
+    }
 
     @Override
     public String toString() {
@@ -30,5 +42,54 @@ public class Individual {
                 ", coefficients=" + coefficients +
                 ", degree=" + degree +
                 '}';
+    }
+
+    double functionResult(CoordinationPoint point) {
+        int deegreeInternal = degree;
+        double result = 0;
+        List<Double> listOfListMultiplication = new ArrayList<>();
+
+        for (int i = 0; i < takenNotTaken.size(); i++) {
+            double coefficientResult = takenNotTaken.get(i) * coefficients.get(i);
+            listOfListMultiplication.add(coefficientResult);
+        }
+
+        for (int i = 0; i < listOfListMultiplication.size(); i++) {
+            result += Math.pow(point.getX(), deegreeInternal) * listOfListMultiplication.get(i);
+            deegreeInternal--;
+        }
+
+        return result;
+    }
+
+    double fitness(Points ourPoints) {
+        double result = 0;
+        List<CoordinationPoint> groupOne = new ArrayList<>();
+        List<CoordinationPoint> groupTwo = new ArrayList<>();
+
+        for (CoordinationPoint point : ourPoints.getPoints()) {
+            if (functionResult(point) >= point.getY()) {
+                groupTwo.add(point);
+            }
+            else {
+                groupOne.add(point);
+            }
+        }
+
+        List<CoordinationPoint> correctGroupOne = ourPoints.groupByGroupNumber(1);
+
+        for (int i = 0; i < correctGroupOne.size() ; i++) {
+            int counter = 0;
+
+
+
+//            if (correctGroupOne.equals(groupOne)){
+//                counter++;
+//            }
+        }
+
+
+
+        return result;
     }
 }

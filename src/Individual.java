@@ -78,17 +78,14 @@ public class Individual {
 
         List<CoordinationPoint> correctGroupOne = ourPoints.groupByGroupNumber(1);
 
-        for (int i = 0; i < correctGroupOne.size() ; i++) {
-            int counter = 0;
+        groupOne.removeAll(correctGroupOne);
 
+//        System.out.println(groupOne.size());
+//        System.out.println(correctGroupOne.size());
 
+        result = groupOne.size()/correctGroupOne.size();
 
-//            if (correctGroupOne.equals(groupOne)){
-//                counter++;
-//            }
-        }
-
-
+        System.out.println(result);
 
         return result;
     }

@@ -67,6 +67,14 @@ public class Individual {
         return result;
     }
 
+
+    Individual copy(){
+        Individual individual = new Individual(degree);
+        individual.coefficients = this.coefficients;
+        individual.takenNotTaken = this.takenNotTaken;
+        return individual;
+    }
+
     void fitness(Points ourPoints) {
         double result = 0;
         List<CoordinationPoint> groupOne = new ArrayList<>();
@@ -101,10 +109,8 @@ public class Individual {
         double resultCorrectTwo = doubleGroupTwo/doubleCorrectGroupTwo;
         double percent = ((resultCorrectOne + resultCorrectTwo)*100)/2;
 
-
         this.fitnessResult = percent;
 
-//        System.out.println( "Fitness result:" + result + " " + toString());
-        System.out.println( "ResultOne:" + resultCorrectOne + "resultTwo:" + resultCorrectTwo + "Percent:" + percent + " " + toString());
+//        System.out.println( "ResultOne:" + resultCorrectOne + "resultTwo:" + resultCorrectTwo + "Percent:" + percent + " " + toString());
     }
 }

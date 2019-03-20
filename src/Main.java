@@ -74,10 +74,11 @@ public class Main {
 //        Points points = new Points(pointsGenerator);
 //        individual1.fitness(points);
 
-        PopulationManager newPop = new PopulationManager(50);
+        PopulationManager newPop = new PopulationManager(200);
         newPop.populationList();
         Points points = new Points(pointsGenerator);
         newPop.populationFitness(points);
+
     }
 }
 

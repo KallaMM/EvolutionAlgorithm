@@ -4,9 +4,10 @@ import java.util.Random;
 
 public class Individual {
 
-    List<Integer> takenNotTaken;
-    List<Integer> coefficients;
-    int degree;
+   private List<Integer> takenNotTaken;
+   private List<Integer> coefficients;
+   private int degree;
+   private double fitnessResult;
 
     Individual(int degree) {
         takenNotTaken = new ArrayList<>();
@@ -26,12 +27,16 @@ public class Individual {
         return degree;
     }
 
+    public double getFitnessResult() {
+        return fitnessResult;
+    }
+
     void initialise() {
         Random random = new Random();
 
         for (int i = 0; i < (degree + 1); i++) {
             takenNotTaken.add(random.nextInt(2));
-            coefficients.add(random.nextInt());
+            coefficients.add(random.nextInt(21));
         }
     }
 
@@ -41,7 +46,7 @@ public class Individual {
                 "takenNotTaken=" + takenNotTaken +
                 ", coefficients=" + coefficients +
                 ", degree=" + degree +
-                '}';
+                '}' + "\n";
     }
 
     double functionResult(CoordinationPoint point) {
@@ -62,7 +67,7 @@ public class Individual {
         return result;
     }
 
-    double fitness(Points ourPoints) {
+    void fitness(Points ourPoints) {
         double result = 0;
         List<CoordinationPoint> groupOne = new ArrayList<>();
         List<CoordinationPoint> groupTwo = new ArrayList<>();
@@ -77,16 +82,29 @@ public class Individual {
         }
 
         List<CoordinationPoint> correctGroupOne = ourPoints.groupByGroupNumber(1);
+        List<CoordinationPoint> correctGroupTwo = ourPoints.groupByGroupNumber(2);
 
-        groupOne.removeAll(correctGroupOne);
+
+        groupOne.removeAll(correctGroupTwo);
+        groupTwo.removeAll(correctGroupOne);
 
 //        System.out.println(groupOne.size());
 //        System.out.println(correctGroupOne.size());
+        double doubleGroupOne = (double) groupOne.size();
+        double doubleCorrectGroupOne = (double)correctGroupOne.size();
+        double doubleGroupTwo = (double) groupTwo.size();
+        double doubleCorrectGroupTwo = (double)correctGroupTwo.size();
 
-        result = groupOne.size()/correctGroupOne.size();
+//        result = doubleGroupOne/doubleCorrectGroupOne;
 
-        System.out.println(result);
+        double resultCorrectOne = doubleGroupOne/doubleCorrectGroupOne;
+        double resultCorrectTwo = doubleGroupTwo/doubleCorrectGroupTwo;
+        double percent = ((resultCorrectOne + resultCorrectTwo)*100)/2;
 
-        return result;
+
+        this.fitnessResult = percent;
+
+//        System.out.println( "Fitness result:" + result + " " + toString());
+        System.out.println( "ResultOne:" + resultCorrectOne + "resultTwo:" + resultCorrectTwo + "Percent:" + percent + " " + toString());
     }
 }

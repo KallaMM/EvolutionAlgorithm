@@ -31,6 +31,14 @@ public class Individual {
         return fitnessResult;
     }
 
+    public void setTakenNotTaken(List<Integer> takenNotTaken) {
+        this.takenNotTaken = takenNotTaken;
+    }
+
+    public void setCoefficients(List<Integer> coefficients) {
+        this.coefficients = coefficients;
+    }
+
     void initialise() {
         Random random = new Random();
 

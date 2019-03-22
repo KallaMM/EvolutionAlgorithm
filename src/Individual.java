@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Individual {
 
-   private List<Integer> takenNotTaken;
-   private List<Integer> coefficients;
-   private int degree;
-   private double fitnessResult;
+    private List<Integer> takenNotTaken;
+    private List<Double> coefficients;
+    private int degree;
+    private double fitnessResult;
 
     Individual(int degree) {
         takenNotTaken = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Individual {
         return takenNotTaken;
     }
 
-    public List<Integer> getCoefficients() {
+    public List<Double> getCoefficients() {
         return coefficients;
     }
 
@@ -35,7 +35,7 @@ public class Individual {
         this.takenNotTaken = takenNotTaken;
     }
 
-    public void setCoefficients(List<Integer> coefficients) {
+    public void setCoefficients(List<Double> coefficients) {
         this.coefficients = coefficients;
     }
 
@@ -44,7 +44,7 @@ public class Individual {
 
         for (int i = 0; i < (degree + 1); i++) {
             takenNotTaken.add(random.nextInt(2));
-            coefficients.add(random.nextInt(21));
+            coefficients.add(random.nextDouble()*10);
         }
     }
 
@@ -54,6 +54,7 @@ public class Individual {
                 "takenNotTaken=" + takenNotTaken +
                 ", coefficients=" + coefficients +
                 ", degree=" + degree +
+                ",fitness" + fitnessResult +
                 '}' + "\n";
     }
 
@@ -76,7 +77,7 @@ public class Individual {
     }
 
 
-    Individual copy(){
+    Individual copy() {
         Individual individual = new Individual(degree);
         individual.coefficients = this.coefficients;
         individual.takenNotTaken = this.takenNotTaken;
@@ -91,8 +92,7 @@ public class Individual {
         for (CoordinationPoint point : ourPoints.getPoints()) {
             if (functionResult(point) >= point.getY()) {
                 groupTwo.add(point);
-            }
-            else {
+            } else {
                 groupOne.add(point);
             }
         }
@@ -107,15 +107,15 @@ public class Individual {
 //        System.out.println(groupOne.size());
 //        System.out.println(correctGroupOne.size());
         double doubleGroupOne = (double) groupOne.size();
-        double doubleCorrectGroupOne = (double)correctGroupOne.size();
+        double doubleCorrectGroupOne = (double) correctGroupOne.size();
         double doubleGroupTwo = (double) groupTwo.size();
-        double doubleCorrectGroupTwo = (double)correctGroupTwo.size();
+        double doubleCorrectGroupTwo = (double) correctGroupTwo.size();
 
 //        result = doubleGroupOne/doubleCorrectGroupOne;
 
-        double resultCorrectOne = doubleGroupOne/doubleCorrectGroupOne;
-        double resultCorrectTwo = doubleGroupTwo/doubleCorrectGroupTwo;
-        double percent = ((resultCorrectOne + resultCorrectTwo)*100)/2;
+        double resultCorrectOne = doubleGroupOne / doubleCorrectGroupOne;
+        double resultCorrectTwo = doubleGroupTwo / doubleCorrectGroupTwo;
+        double percent = ((resultCorrectOne + resultCorrectTwo) * 100) / 2;
 
         this.fitnessResult = percent;
 

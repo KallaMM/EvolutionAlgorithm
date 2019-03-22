@@ -6,7 +6,7 @@ public class CoordinationPoint {
     private double y;
     private int group;
 
-    public CoordinationPoint(int x, int y, int group) {
+    public CoordinationPoint(double x, double y, int group) {
         this.x = x;
         this.y = y;
         this.group = group;

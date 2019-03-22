@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Mutation {
@@ -6,6 +9,14 @@ public class Mutation {
 
     public Mutation(int chanceForMutation) {
         this.chanceForMutation = chanceForMutation;
+    }
+
+    List<Individual> matationOfPopulation(List<Individual> population){
+        List<Individual> newGenerationAfterMutation = new ArrayList<>();
+        for (Individual individual: population) {
+            newGenerationAfterMutation.add(mutated(individual));
+        }
+        return newGenerationAfterMutation;
     }
 
     Individual mutated(Individual individual) {
@@ -17,7 +28,7 @@ public class Mutation {
             int valueTNT = random.nextInt(2);
 
             //2 miejsca bound21
-            int valueC = random.nextInt(21);
+            double valueC = (random.nextDouble()*10);
 
             individual.getTakenNotTaken().set(indexTNT, valueTNT);
             individual.getCoefficients().set(indexC, valueC);

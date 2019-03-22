@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class PopulationManager {
 
-    int populationSize;
-    List<Individual> population = new ArrayList<>();
+   private int populationSize;
+   private List<Individual> population = new ArrayList<>();
 
     public PopulationManager(int populationSize) {
         this.populationSize = populationSize;
@@ -15,9 +15,13 @@ public class PopulationManager {
         return population;
     }
 
+    public void setPopulation(List<Individual> population) {
+        this.population = population;
+    }
+
     public List populationList(){
         for (int i = 0; i < populationSize; i++) {
-            Individual newIndividual = new Individual(2);
+            Individual newIndividual = new Individual(5);
             newIndividual.initialise();
             population.add(newIndividual);
         }
